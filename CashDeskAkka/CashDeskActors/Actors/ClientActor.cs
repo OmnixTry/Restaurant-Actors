@@ -39,7 +39,6 @@ namespace CashDeskActors.Actors
 			});
 
 
-			//restaurant.Tell(new ShortestQueueReq());
 			Random random = new Random();
 			Context.System.Scheduler.ScheduleTellRepeatedly(
 					TimeSpan.FromSeconds(random.Next(5)),
@@ -65,7 +64,6 @@ namespace CashDeskActors.Actors
 			}
 			if (reply.DeskModel.QueueLength < clientModel.NumberInQueue - 2)
 			{
-				//Console.WriteLine($"{reply.DeskModel.Id}, {reply.DeskModel.QueueLength}");
 				//Console.WriteLine($"{DateTime.Now} Actor {clientModel.ClientId} Entering Queue {reply.DeskModel.Id}");
 				currentDesk?.Tell(new LeaveQueueReq(clientModel));
 				EnterQueue(reply.Desk);

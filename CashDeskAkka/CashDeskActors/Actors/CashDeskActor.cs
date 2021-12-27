@@ -13,7 +13,6 @@ namespace CashDeskActors.Actors
 	{
 		
 		private readonly CashDeskModel deskModel;
-		//private readonly IActorRef restaurantActor;
 		private ICancelable processingRequest;
 		public CashDeskActor(int id, int clientProcessingTime)
 		{
@@ -61,7 +60,6 @@ namespace CashDeskActors.Actors
 
 		private void LeaveQueueRequest(LeaveQueueReq req)
 		{
-			//Sender.Tell(new EnterQueueReply(deskModel.QueueLength));
 			//Console.WriteLine($"{DateTime.Now} Client {req.Client.ClientId} Leaves");
 			deskModel.RemoveClient(req.Client);
 		}

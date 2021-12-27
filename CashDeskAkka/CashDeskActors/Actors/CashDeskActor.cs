@@ -87,11 +87,24 @@ namespace CashDeskActors.Actors
 			var client = deskModel.DequeClient();
 			Console.WriteLine($"{DateTime.Now} Client {client.Item1.ClientId} Is processed by  {deskModel.Id}");
 			client.Item2.Tell(new FinishProcessingReq());
-			if(deskModel.QueueLength == 0)
+			if (deskModel.QueueLength == 0)
 			{
 				processingRequest.Cancel();
 			}
+			InformClientsQueueChange();
+			if (deskModel.QueueLength == 0)
+			{
+				processingRequest.Cancel();
+			}
+		
+		}
 
+		private void InformClientsQueueChange()
+		{
+			for (int i = 0; i < deskModel.Queue.Count; i++)
+			{
+				deskModel.Queue[i].Item2.Tell(new QueueMoveReply(i));
+			}
 		}
 	}
 }

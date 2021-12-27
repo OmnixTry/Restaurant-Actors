@@ -10,7 +10,7 @@ namespace CashDeskAkka
 	{
 		static void Main(string[] args)
 		{
-			const int numOfDesks = 50;
+			const int numOfDesks = 10;
 			const int numOfClients = 100;
 			ActorSystem system = ActorSystem.Create("Restaurant");
 			

@@ -33,6 +33,11 @@ namespace CashDeskActors.Actors
 			{
 				Finish();
 			});
+			Receive<QueueMoveReply>(rep =>
+			{
+				MoveQueue(rep);
+			});
+
 
 			//restaurant.Tell(new ShortestQueueReq());
 			Random random = new Random();
@@ -43,6 +48,11 @@ namespace CashDeskActors.Actors
 					new ShortestQueueReq(),
 					Self
 				);
+		}
+
+		private void MoveQueue(QueueMoveReply rep)
+		{
+			clientModel.NumberInQueue = rep.NewLength;
 		}
 
 		private void LengthReply(ShortestQueueLengthReply reply)

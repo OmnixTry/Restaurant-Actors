@@ -47,8 +47,12 @@ namespace CashDeskActors.Actors
 
 		private void ShortestQueueLengthReply()
 		{
-			var x = queueLengths.Values.OrderBy(x => x.DeskModel.QueueLength).First();
-			Sender.Tell(new ShortestQueueLengthReply(x.Length, x.Desk, x.DeskModel));
+			var x = queueLengths.Values.OrderBy(x => x.DeskModel.QueueLength);
+			if (x.Count() > 0)
+			{
+				var res = x.First();
+				Sender.Tell(new ShortestQueueLengthReply(res.Length, res.Desk, res.DeskModel));
+			}
 		}
 
 		private void QueueLengthReply(QueueLengthReply reply)
